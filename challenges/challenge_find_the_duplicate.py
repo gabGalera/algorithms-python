@@ -2,16 +2,16 @@ def find_duplicate(nums):
     if not nums or len(nums) < 2:
         return False
 
-    merge_sort(nums)
-    for index in range(0, len(nums)):
-        position = index + 1
-        end = len(nums)
-        target = nums[position:end]
+    end = len(nums) - 1
+    nums.sort()
+    for index in range(0, end):
+        position = index
+        nextPosition = position + 1
         if type(nums[index]) is str or nums[index] < 0:
             return False
-        search = single_search(target, nums[index])
-        if search != -1 and search is not None:
-            return search
+        search = nums[position] == nums[nextPosition]
+        if search:
+            return nums[position]
 
     return False
 
@@ -45,15 +45,3 @@ def merge(nums, start, mid, end):
         else:
             nums[index] = right[right_index]
             right_index += 1
-
-
-def single_search(nums, target):
-    if nums and nums[0] == target:
-        return nums[0]
-    else:
-        return -1
-
-
-test = [1, 2]
-
-print(find_duplicate(test))
